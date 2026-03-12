@@ -146,8 +146,16 @@ nav.visible{opacity:1}
 .srv-item::before{content:'';position:absolute;left:0;top:0;width:2px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}
 .srv-item:hover{border-color:var(--accent);background:rgba(6,182,212,.05)}
 .srv-item:hover::before{opacity:1}
-.srv-name{font-size:.9rem;font-weight:500}
+.srv-name{font-size:.9rem;font-weight:500;display:flex;align-items:center;gap:.6rem}
 .srv-tech{font-family:var(--font-mono);font-size:.65rem;color:var(--text2);letter-spacing:1px}
+/* Inline SVG icons */
+.icon{width:18px;height:18px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center}
+.icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.proj-banner .icon{width:28px;height:28px}
+.proj-banner .icon svg{stroke:rgba(255,255,255,.9);stroke-width:1.5}
+#sound-toggle{display:flex;align-items:center;gap:.4rem}
+#sound-toggle .icon{width:14px;height:14px}
+#sound-toggle .icon svg{stroke:currentColor}
 
 /* ===== PROJECTS SECTION ===== */
 #s-projects{z-index:4}
@@ -318,7 +326,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--arc-gold);outline-o
 </div>
 
 <!-- Sound toggle -->
-<button id="sound-toggle" onclick="toggleSound()">&#128263; SOUND</button>
+<button id="sound-toggle" onclick="toggleSound()"><span class="icon" id="sound-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></span>SOUND</button>
 
 <!-- Toast for easter egg -->
 <div id="toast"></div>
@@ -349,11 +357,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--arc-gold);outline-o
   <div class="section-inner">
     <p class="srv-label">// AVAILABLE MODULES</p>
     <ul class="srv-list">
-      <li class="srv-item"><span class="srv-name"><span style="margin-right:.5rem">&#9889;</span>Full-Stack Web &amp; Mobile</span><span class="srv-tech">NEXT / FLUTTER</span></li>
-      <li class="srv-item"><span class="srv-name"><span style="margin-right:.5rem">&#129504;</span>AI Integration &amp; RAG</span><span class="srv-tech">CLAUDE / GPT-4</span></li>
-      <li class="srv-item"><span class="srv-name"><span style="margin-right:.5rem">&#9881;&#65039;</span>No-Code Automation</span><span class="srv-tech">MAKE / N8N</span></li>
-      <li class="srv-item"><span class="srv-name"><span style="margin-right:.5rem">&#127891;</span>AI &amp; No-Code Training</span><span class="srv-tech">BOOTCAMPS</span></li>
-      <li class="srv-item"><span class="srv-name"><span style="margin-right:.5rem">&#128295;</span>Embedded Systems</span><span class="srv-tech">DoIP / UDS / CAN</span></li>
+      <li class="srv-item"><span class="srv-name"><span class="icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>Full-Stack Web &amp; Mobile</span><span class="srv-tech">NEXT / FLUTTER</span></li>
+      <li class="srv-item"><span class="srv-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.5-1.3 4.7-3.2 6H8.2C6.3 13.7 5 11.5 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="4.9" y1="4.9" x2="7.1" y2="7.1"/><line x1="19.1" y1="4.9" x2="16.9" y2="7.1"/></svg></span>AI Integration &amp; RAG</span><span class="srv-tech">CLAUDE / GPT-4</span></li>
+      <li class="srv-item"><span class="srv-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 3v3m6.4-.9L16.5 7M21 12h-3m.9 6.4L17 16.5M12 21v-3m-6.4.9L7.5 17M3 12h3m-.9-6.4L7 7.5"/><circle cx="12" cy="12" r="4"/></svg></span>No-Code Automation</span><span class="srv-tech">MAKE / N8N</span></li>
+      <li class="srv-item"><span class="srv-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="13" y2="11"/></svg></span>AI &amp; No-Code Training</span><span class="srv-tech">BOOTCAMPS</span></li>
+      <li class="srv-item"><span class="srv-name"><span class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg></span>Embedded Systems</span><span class="srv-tech">DoIP / UDS / CAN</span></li>
     </ul>
   </div>
 </div>
@@ -363,7 +371,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--arc-gold);outline-o
     <p class="proj-label">// MISSION LOG &#8212; 3 LIVE PROJECTS</p>
     <div class="proj-grid">
       <div class="proj-card">
-        <div class="proj-banner">&#128218;</div>
+        <div class="proj-banner"><span class="icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span></div>
         <div class="proj-card-body">
           <div class="proj-badge">LIVE // EDTECH</div>
           <h3 class="proj-title">Samacours</h3>
@@ -372,7 +380,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--arc-gold);outline-o
         </div>
       </div>
       <div class="proj-card">
-        <div class="proj-banner">&#128663;</div>
+        <div class="proj-banner"><span class="icon"><svg viewBox="0 0 24 24"><path d="M5 17h14v-3H5v3zm0 0a2 2 0 0 1-2-2V9l2.5-5h13L21 9v6a2 2 0 0 1-2 2"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg></span></div>
         <div class="proj-card-body">
           <div class="proj-badge">LIVE // MARKETPLACE</div>
           <h3 class="proj-title">Gunoor</h3>
@@ -381,7 +389,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--arc-gold);outline-o
         </div>
       </div>
       <div class="proj-card">
-        <div class="proj-banner">&#127918;</div>
+        <div class="proj-banner"><span class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="10" r=".5" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r=".5" fill="currentColor" stroke="none"/></svg></span></div>
         <div class="proj-card-body">
           <div class="proj-badge">LIVE // E-SPORT</div>
           <h3 class="proj-title">ClubStats Pro</h3>
@@ -1169,17 +1177,20 @@ function playWhoosh(){
   src.start();src.stop(audioCtx.currentTime+0.15);
 }
 
+var svgSoundOff='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+var svgSoundOn='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+
 function toggleSound(){
   initAudio();
   soundEnabled=!soundEnabled;
-  var btn=document.getElementById('sound-toggle');
+  var iconEl=document.getElementById('sound-icon');
   if(soundEnabled){
     if(audioCtx.state==='suspended') audioCtx.resume();
     droneGain.gain.setTargetAtTime(0.015,audioCtx.currentTime,0.5);
-    btn.textContent='\uD83D\uDD0A SOUND';
+    iconEl.innerHTML=svgSoundOn;
   } else {
     droneGain.gain.setTargetAtTime(0,audioCtx.currentTime,0.3);
-    btn.textContent='\uD83D\uDD07 SOUND';
+    iconEl.innerHTML=svgSoundOff;
   }
 }
 
@@ -1237,7 +1248,7 @@ function activateKonami(){
     ring.material.opacity=0.5;
   });
   shootingStars.forEach(function(ss){triggerShootingStar(ss);});
-  showToast('\uD83C\uDFAE CHEAT CODE ACTIVATED');
+  showToast('// CHEAT CODE ACTIVATED');
   setTimeout(function(){
     konamiActive=false;
     orbitRings.forEach(function(ring,i){
