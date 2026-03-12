@@ -9,7 +9,7 @@
 <meta property="og:title" content="Diame SENE — Embedded Systems Engineer &amp; AI Builder">
 <meta property="og:description" content="Full-Stack, AI/RAG, Embedded Systems. Building production-grade applications from Dakar to Paris.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://portfolio-green-nine-34.vercel.app/og-image.png">
+<!-- og:image to be added when screenshot available -->
 <meta name="twitter:card" content="summary_large_image">
 <!-- Globe emoji favicon -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8D%3C/text%3E%3C/svg%3E">
@@ -18,7 +18,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* GLOBE PORTFOLIO v4 */
+/* GLOBE PORTFOLIO v5 — PROFESSIONAL POLISH */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#000005;--globe-blue:#2563eb;--atmo:#3b82f6;
@@ -31,8 +31,8 @@
 }
 html{scroll-behavior:smooth;scroll-snap-type:none}
 /* Page load fade */
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;opacity:0;animation:bodyFadeIn 1s ease forwards}
-@keyframes bodyFadeIn{0%{opacity:0}100%{opacity:1}}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden}
+/* Body opacity controlled by boot JS — no CSS animation conflict */
 canvas#globe-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
 
 /* Nebula background */
@@ -90,8 +90,8 @@ nav.visible{opacity:1}
 #hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
 /* Mobile nav overlay */
-#mobile-nav-overlay{display:none;position:fixed;inset:0;z-index:105;background:rgba(0,0,5,0.97);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;transition:opacity .3s}
-#mobile-nav-overlay.open{display:flex;opacity:1}
+#mobile-nav-overlay{position:fixed;inset:0;z-index:105;background:rgba(0,0,5,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s ease}
+#mobile-nav-overlay.open{opacity:1;visibility:visible}
 #mobile-nav-overlay a{font-family:var(--font-title);font-size:2rem;color:var(--text);text-decoration:none;letter-spacing:3px;text-transform:uppercase;transition:color .3s}
 #mobile-nav-overlay a:hover{color:var(--arc-gold)}
 
@@ -203,7 +203,7 @@ nav.visible{opacity:1}
 /* Scroll dots indicator */
 .scroll-dots{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:12px;opacity:0;transition:opacity .8s}
 .scroll-dots.visible{opacity:1}
-.scroll-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all .4s;cursor:pointer}
+.scroll-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all .4s;cursor:pointer;border:none;padding:0;appearance:none;-webkit-appearance:none}
 .scroll-dots .dot.active{background:var(--arc-gold);box-shadow:0 0 8px rgba(251,191,36,0.4)}
 
 /* ===== MOBILE ===== */
@@ -223,9 +223,35 @@ nav.visible{opacity:1}
   .scroll-dots{display:none}
   #sound-toggle{bottom:1rem;left:1rem}
 }
+
+/* ===== ACCESSIBILITY ===== */
+/* Focus-visible for keyboard navigation */
+*:focus-visible{outline:2px solid var(--arc-gold);outline-offset:2px;border-radius:4px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--arc-gold);outline-offset:2px}
+.scroll-dots .dot:focus-visible{outline:2px solid var(--arc-gold);outline-offset:4px}
+
+/* Reduced motion: disable all non-essential animations */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
+  html{scroll-behavior:auto}
+  .hero-name .char{opacity:1 !important;transform:none !important}
+  .cursor-glow{display:none !important}
+  #nebula-bg{animation:none !important}
+}
 </style>
 </head>
 <body>
+
+<!-- Noscript fallback -->
+<noscript>
+  <div style="position:fixed;inset:0;z-index:9999;background:#000005;color:#fff;display:flex;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;padding:2rem">
+    <div>
+      <h1 style="font-size:2rem;margin-bottom:1rem">D.SENE // DAKAR &#8596; PARIS</h1>
+      <p style="color:#94a3b8">This portfolio requires JavaScript to display the interactive 3D globe experience.</p>
+      <p style="margin-top:1rem"><a href="mailto:diame.sene.dev@gmail.com" style="color:#fbbf24">diame.sene.dev@gmail.com</a></p>
+    </div>
+  </div>
+</noscript>
 
 <!-- Nebula background -->
 <div id="nebula-bg"></div>
@@ -254,12 +280,12 @@ nav.visible{opacity:1}
 <div class="scroll-progress" id="scroll-bar"></div>
 
 <!-- Scroll dots -->
-<div class="scroll-dots" id="scroll-dots">
-  <div class="dot active" data-idx="0"></div>
-  <div class="dot" data-idx="1"></div>
-  <div class="dot" data-idx="2"></div>
-  <div class="dot" data-idx="3"></div>
-  <div class="dot" data-idx="4"></div>
+<div class="scroll-dots" id="scroll-dots" role="navigation" aria-label="Section navigation">
+  <button class="dot active" data-idx="0" aria-label="Hero section" tabindex="0"></button>
+  <button class="dot" data-idx="1" aria-label="About section" tabindex="0"></button>
+  <button class="dot" data-idx="2" aria-label="Services section" tabindex="0"></button>
+  <button class="dot" data-idx="3" aria-label="Projects section" tabindex="0"></button>
+  <button class="dot" data-idx="4" aria-label="Contact section" tabindex="0"></button>
 </div>
 
 <!-- Nav -->
@@ -373,10 +399,10 @@ nav.visible{opacity:1}
     <h2 class="contact-title">LET'S BUILD</h2>
     <p class="contact-sub">Available for freelance missions &amp; consulting. Select your preferred channel.</p>
     <div class="contact-links">
-      <a href="https://www.malt.fr/profile/diamesene" target="_blank">MALT</a>
-      <a href="https://www.upwork.com/freelancers/~01e9980ec1193c0119" target="_blank">UPWORK</a>
-      <a href="https://www.fiverr.com/diamesene" target="_blank">FIVERR</a>
-      <a href="https://comeup.com/fr/user/DiameSENE" target="_blank">COMEUP</a>
+      <a href="https://www.malt.fr/profile/diamesene" target="_blank" rel="noopener noreferrer">MALT</a>
+      <a href="https://www.upwork.com/freelancers/~01e9980ec1193c0119" target="_blank" rel="noopener noreferrer">UPWORK</a>
+      <a href="https://www.fiverr.com/diamesene" target="_blank" rel="noopener noreferrer">FIVERR</a>
+      <a href="https://comeup.com/fr/user/DiameSENE" target="_blank" rel="noopener noreferrer">COMEUP</a>
     </div>
     <p class="contact-email">// DIRECT: <a href="mailto:diame.sene.dev@gmail.com">diame.sene.dev@gmail.com</a></p>
     <p class="contact-footer">&copy; 2026 D.SENE // DAKAR &#8596; PARIS // ALL SYSTEMS OPERATIONAL</p>
@@ -390,18 +416,25 @@ nav.visible{opacity:1}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script>
 /* =========================================================
-   GLOBE PORTFOLIO v4 -- D.SENE // DAKAR <-> PARIS
-   v4 improvements: SplitText hero, cloud layer, nebula bg,
-   magnetic buttons, project banners, scroll snap magnetic,
-   sound toggle, hamburger nav + OG tags, konami easter egg,
-   polish & performance
+   GLOBE PORTFOLIO v5 -- D.SENE // DAKAR <-> PARIS
+   v5: Professional polish pass — real delta time, a11y,
+   security, reduced-motion, focus styles, boot fix,
+   scroll lerp, console branding, pin/star fixes
    ========================================================= */
+
+/* Console branding */
+console.log('%c🌍 D.SENE // DAKAR ↔ PARIS','color:#fbbf24;font-size:18px;font-weight:bold;font-family:monospace;');
+console.log('%cEmbedded Systems Engineer & AI Builder','color:#94a3b8;font-size:12px;font-family:monospace;');
+console.log('%cInterested? → diame.sene.dev@gmail.com','color:#06b6d4;font-size:11px;font-family:monospace;');
 
 var W=window.innerWidth,H=window.innerHeight,isMob=W<769;
 var scrollProg=0,targetProg=0,time=0,prevSection=-1,frameCount=0;
 var GLOBE_R=5;
 var konamiActive=false;
 var konamiBaseSpeed=0.0008;
+var lastFrameTime=performance.now();
+/* Body starts hidden, boot reveals it */
+document.body.style.opacity='0';
 
 /* -------------------------------------------------------
    IMPROVEMENT 1: SplitText Hero Animation
@@ -723,7 +756,7 @@ function triggerShootingStar(ss){
   var angle=Math.random()*Math.PI*2;
   var dist=40+Math.random()*60;
   ss.startPos.set(Math.cos(angle)*dist,15+Math.random()*30,-20-Math.random()*40);
-  ss.direction.set((Math.random()-0.5)*2,-0.5-Math.random()*0.5,(Math.random()-0.5)).normalize();
+  ss.direction.set((Math.random()-0.5)*2,-0.5-Math.random()*0.5,(Math.random()-0.5)*2).normalize();
   ss.active=true;ss.progress=0;ss.mat.opacity=0.7;
 }
 
@@ -885,24 +918,21 @@ function updateSections(p){
   }
 }
 
-// -- Scroll --
-window.addEventListener('scroll',function(){
-  var mx=document.getElementById('scroll-spacer').offsetHeight-H;
-  targetProg=Math.max(0,Math.min(1,window.scrollY/mx));
-},{passive:true});
+// -- Scroll (single unified handler) --
+var scrollSnapTimer=null;
+var lastScrollY=window.scrollY;
+var lastScrollTime=Date.now();
+
 function smoothNav(p){
   var mx=document.getElementById('scroll-spacer').offsetHeight-H;
   window.scrollTo({top:p*mx,behavior:'smooth'});
 }
 
-/* -------------------------------------------------------
-   IMPROVEMENT 6: Scroll Snap Magnetic
-   300ms debounce, snap to nearest section threshold
-   ------------------------------------------------------- */
-var scrollSnapTimer=null;
-var lastScrollY=window.scrollY;
-var lastScrollTime=Date.now();
 window.addEventListener('scroll',function(){
+  var mx=document.getElementById('scroll-spacer').offsetHeight-H;
+  targetProg=Math.max(0,Math.min(1,window.scrollY/mx));
+
+  /* Scroll snap magnetic: 300ms debounce */
   var now=Date.now();
   var velocity=Math.abs(window.scrollY-lastScrollY)/(now-lastScrollTime+1);
   lastScrollY=window.scrollY;
@@ -910,7 +940,6 @@ window.addEventListener('scroll',function(){
   clearTimeout(scrollSnapTimer);
   scrollSnapTimer=setTimeout(function(){
     if(velocity<2){
-      var mx=document.getElementById('scroll-spacer').offsetHeight-H;
       var prog=Math.max(0,Math.min(1,window.scrollY/mx));
       var nearest=secThresh[0],nearestDist=Math.abs(prog-secThresh[0]);
       for(var i=1;i<secThresh.length;i++){
@@ -936,9 +965,12 @@ var globeRotY=Math.PI+(17.44*Math.PI/180);
 // -- Animate loop --
 function animate(){
   requestAnimationFrame(animate);
-  time+=0.016;frameCount++;
+  var now=performance.now();
+  var dt=Math.min((now-lastFrameTime)/1000,0.1); /* cap at 100ms to prevent jumps */
+  lastFrameTime=now;
+  time+=dt;frameCount++;
   starMat.uniforms.uTime.value=time;
-  scrollProg+=(targetProg-scrollProg)*0.08;
+  scrollProg+=(targetProg-scrollProg)*0.12;
 
   lerpCam(scrollProg);
   var swayX=Math.sin(time*0.35)*0.12;
@@ -967,7 +999,7 @@ function animate(){
       if(time>=ss.nextTrigger) triggerShootingStar(ss);
       continue;
     }
-    ss.progress+=0.016/ss.speed;
+    ss.progress+=dt/ss.speed;
     if(ss.progress>=1){ss.active=false;ss.mat.opacity=0;ss.nextTrigger=time+3+Math.random()*5;continue;}
     var fadeIn=Math.min(ss.progress*5,1);
     var fadeOut=Math.min((1-ss.progress)*5,1);
@@ -997,7 +1029,7 @@ function animate(){
     var psc=1+Math.sin(time*2.5+i*2)*0.3;
     pin.pulseRing.position.copy(_v1);pin.pulseRing.lookAt(camera.position);
     pin.pulseRing.scale.set(psc,psc,psc);
-    pin.pulseRing.material.opacity=0.3*(1-(psc-1)/0.3);
+    pin.pulseRing.material.opacity=Math.max(0,0.3*(1-(psc-1)/0.3));
   }
   _v1.copy(dakarPos).normalize().multiplyScalar(GLOBE_R*1.4).applyAxisAngle(_axis,gRotY);
   dakarLabel.position.copy(_v1);
@@ -1030,12 +1062,16 @@ window.addEventListener('resize',function(){
 
 // -- Boot sequence --
 (function boot(){
+  /* Reveal body immediately for boot screen */
+  document.body.style.transition='opacity 0.3s ease';
+  document.body.style.opacity='1';
   var lines=document.querySelectorAll('.boot-lines div');
   var fill=document.getElementById('boot-fill');
   var bootEl=document.getElementById('boot');
   var delay=0;
+  /* Consistent timing: 350ms per line for professional pacing */
   lines.forEach(function(line,i){
-    delay+=300+Math.random()*200;
+    delay+=350;
     setTimeout(function(){line.style.opacity=1;line.style.transition='opacity .3s';fill.style.width=((i+1)/lines.length*100)+'%';},delay);
   });
   setTimeout(function(){
