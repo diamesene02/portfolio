@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIAME SENE — Portfolio</title>
+<meta name="description" content="Portfolio of Diame SENE — Embedded Systems Engineer & AI Builder — DAKAR / PARIS">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ RESET & BASE ═══════════════ */
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{background:#000;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+::selection{background:rgba(200,164,78,.3);color:#fff}
+
+/* ═══════════════ GLOBAL ═══════════════ */
+.accent{color:#c8a44e}
+.dim{color:rgba(255,255,255,.35)}
+section{position:relative}
+
+/* ═══════════════ CURTAIN LOADER ═══════════════ */
+#curtain{
+  position:fixed;inset:0;z-index:200;display:flex;
+}
+#curtain-left,#curtain-right{
+  width:50%;height:100%;background:#000;
+  display:flex;align-items:center;
+}
+#curtain-left{justify-content:flex-end;padding-right:1rem}
+#curtain-right{justify-content:flex-start;padding-left:1rem}
+#curtain-text{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(1rem,3vw,1.8rem);
+  font-weight:300;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);white-space:nowrap;
+}
+
+/* ═══════════════ SCROLL PROGRESS ═══════════════ */
+#progress{
+  position:fixed;top:0;left:0;height:2px;z-index:100;width:100%;
+  background:rgba(255,255,255,.06);
+}
+#progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#c8a44e,#fff);
+  transition:width .1s linear;
+}
+
+/* ═══════════════ NAV ═══════════════ */
+#nav{
+  position:fixed;top:0;left:0;width:100%;z-index:90;
+  padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;
+  mix-blend-mode:difference;
+}
+#nav-logo{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.85rem;
+  letter-spacing:.15em;text-transform:uppercase;
+}
+#nav-links{display:flex;gap:2rem}
+#nav-links a{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  color:#fff;text-decoration:none;letter-spacing:.12em;
+  text-transform:uppercase;opacity:.5;transition:opacity .3s;
+}
+#nav-links a:hover{opacity:1}
+
+/* ═══════════════ SECTION 1: HERO ZOOM ═══════════════ */
+#hero{
+  height:300vh;display:flex;align-items:flex-start;justify-content:center;
+  background:#000;
+}
+#hero-sticky{
+  position:sticky;top:0;height:100vh;width:100%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-name{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(5rem,15vw,14rem);line-height:.88;
+  letter-spacing:-.05em;text-align:center;white-space:nowrap;
+  will-change:transform;
+}
+.hero-name span{display:block}
+.hero-sub{
+  font-family:'JetBrains Mono',monospace;font-size:clamp(.6rem,1.2vw,.85rem);
+  letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);margin-top:2rem;
+  text-align:center;white-space:nowrap;
+}
+.hero-scroll-hint{
+  position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.55rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.15);
+  animation:pulseHint 2.5s ease-in-out infinite;
+}
+@keyframes pulseHint{
+  0%,100%{opacity:.15;transform:translateX(-50%) translateY(0)}
+  50%{opacity:.35;transform:translateX(-50%) translateY(5px)}
+}
+
+/* ═══════════════ SECTION 2: WORDS REVEAL ═══════════════ */
+#bio{height:250vh;background:#000}
+#bio-sticky{
+  position:sticky;top:0;height:100vh;width:100%;
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+}
+.bio-words{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,4vw,3.2rem);
+  font-weight:300;line-height:1.8;text-align:center;max-width:900px;
+}
+.bio-words .word{
+  display:inline-block;opacity:.12;transition:none;
+  margin:0 .15em;
+}
+.bio-words .word.active{opacity:1}
+.bio-words .word.highlight{color:#c8a44e;font-weight:600}
+.tech-pills{
+  position:absolute;bottom:12vh;left:50%;transform:translateX(-50%);
+  display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;
+  max-width:700px;opacity:0;
+}
+.tech-pill{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  padding:.35rem .8rem;border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;color:rgba(255,255,255,.35);letter-spacing:.05em;
+}
+
+/* ═══════════════ SECTION 3: SERVICES — HORIZONTAL STACK ═══════════════ */
+#services{background:#fff;color:#000;padding:0}
+#services-sticky{
+  position:sticky;top:0;height:100vh;width:100%;
+  display:flex;align-items:center;overflow:hidden;
+}
+#services-label{
+  position:absolute;top:8vh;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  letter-spacing:.25em;text-transform:uppercase;color:rgba(0,0,0,.25);
+}
+#services-track{
+  display:flex;gap:2rem;padding:0 10vw;will-change:transform;
+}
+.svc-card{
+  flex:0 0 280px;height:380px;border-radius:24px;
+  background:#f5f5f5;padding:2.5rem 2rem;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+.svc-card:hover{transform:translateY(-8px)}
+.svc-number{
+  position:absolute;top:2rem;left:2rem;
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  color:rgba(0,0,0,.2);letter-spacing:.1em;
+}
+.svc-icon{font-size:2.5rem;margin-bottom:1.5rem}
+.svc-title{
+  font-family:'Space Grotesk',sans-serif;font-size:1.15rem;
+  font-weight:700;margin-bottom:.5rem;
+}
+.svc-desc{font-size:.8rem;color:rgba(0,0,0,.45);line-height:1.6}
+
+/* ═══════════════ SECTION 4: PROJECTS — FULL BLEED ═══════════════ */
+#projects{background:#000}
+#projects-label{
+  text-align:center;padding-top:12vh;
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.2);
+}
+.project-block{
+  min-height:100vh;display:flex;align-items:center;
+  padding:8vh 6vw;position:relative;
+}
+.project-block:nth-child(odd){flex-direction:row}
+.project-block:nth-child(even){flex-direction:row-reverse}
+.project-info{flex:1;max-width:500px;padding:2rem}
+.project-mockup{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.project-number{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(6rem,12vw,10rem);
+  font-weight:700;opacity:.04;position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.project-tag-color{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  margin-right:.5rem;vertical-align:middle;
+}
+.project-name{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:700;margin-bottom:.8rem;opacity:0;
+}
+.project-desc{
+  font-size:.9rem;color:rgba(255,255,255,.4);line-height:1.7;
+  margin-bottom:1.5rem;opacity:0;
+}
+.project-tech{display:flex;flex-wrap:wrap;gap:.5rem;opacity:0}
+.project-tech span{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  padding:.25rem .6rem;border-radius:20px;
+  border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);
+}
+.project-tech .live{color:#10b981;border-color:rgba(16,185,129,.3)}
+.mockup-frame{
+  width:clamp(250px,30vw,400px);height:clamp(160px,20vw,260px);
+  border-radius:16px;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(40px);
+}
+.mockup-frame::before{
+  content:'';position:absolute;inset:0;border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);z-index:2;
+}
+.mockup-gradient{
+  position:absolute;inset:0;
+  border-radius:16px;
+}
+.mockup-label{
+  position:absolute;bottom:1.2rem;left:1.5rem;z-index:3;
+  font-family:'JetBrains Mono',monospace;font-size:.55rem;
+  color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;
+}
+.mockup-badge{
+  position:absolute;top:1.2rem;right:1.5rem;z-index:3;
+  font-family:'JetBrains Mono',monospace;font-size:.5rem;
+  padding:.2rem .5rem;border-radius:10px;
+  background:rgba(16,185,129,.15);color:#10b981;letter-spacing:.05em;
+}
+
+/* ═══════════════ SECTION 5: STATS COUNTER ═══════════════ */
+#stats{
+  height:60vh;display:flex;align-items:center;justify-content:center;
+  background:#000;border-top:1px solid rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.stats-grid{
+  display:flex;gap:clamp(3rem,8vw,8rem);text-align:center;
+}
+.stat-item{opacity:0;transform:translateY(30px)}
+.stat-number{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:700;line-height:1;
+}
+.stat-label{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  color:rgba(255,255,255,.25);letter-spacing:.15em;
+  text-transform:uppercase;margin-top:.8rem;
+}
+
+/* ═══════════════ SECTION 6: CONTACT ═══════════════ */
+#contact{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:#000;padding:4rem 2rem;
+}
+.contact-inner{text-align:center;max-width:700px}
+.contact-title{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,10vw,8rem);
+  font-weight:700;letter-spacing:-.04em;line-height:.9;
+  opacity:0;
+}
+.contact-title .letter{
+  display:inline-block;opacity:0;transform:translateY(60px);
+}
+.contact-sub{
+  font-size:.85rem;color:rgba(255,255,255,.3);margin:2rem 0 3rem;opacity:0;
+}
+.contact-links{
+  display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;opacity:0;
+}
+.contact-link{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  padding:.7rem 1.8rem;border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;color:rgba(255,255,255,.6);text-decoration:none;
+  transition:all .3s cubic-bezier(.4,0,.2,1);letter-spacing:.08em;
+}
+.contact-link:hover{
+  border-color:#c8a44e;color:#c8a44e;
+  transform:translateY(-3px);box-shadow:0 8px 25px rgba(200,164,78,.1);
+}
+.contact-email{
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;
+  color:rgba(255,255,255,.2);margin-top:2.5rem;opacity:0;
+}
+.contact-email a{color:#c8a44e;text-decoration:none;transition:color .3s}
+.contact-email a:hover{color:#fff}
+.contact-footer{
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;
+  color:rgba(255,255,255,.08);margin-top:4rem;letter-spacing:.12em;opacity:0;
+}
+
+/* ═══════════════ FILM GRAIN OVERLAY ═══════════════ */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px 128px;
+}
+
+/* ═══════════════ SECTION TRANSITIONS ═══════════════ */
+#services::before{
+  content:'';position:absolute;top:-80px;left:0;width:100%;height:80px;
+  background:linear-gradient(to bottom,#000,#fff);z-index:1;
+}
+#services::after{
+  content:'';position:absolute;bottom:-80px;left:0;width:100%;height:80px;
+  background:linear-gradient(to bottom,#fff,#000);z-index:1;
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media(max-width:768px){
+  #nav{padding:1rem 1.5rem}
+  #nav-links{display:none}
+  .project-block,.project-block:nth-child(even){
+    flex-direction:column;padding:6vh 1.5rem;
+  }
+  .project-info{max-width:100%;padding:1rem 0}
+  .stats-grid{flex-direction:column;gap:2.5rem}
+  .svc-card{flex:0 0 240px;height:320px}
+  .contact-links{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- CURTAIN LOADER -->
+<div id="curtain">
+  <div id="curtain-left"><span id="curtain-text">D.SENE</span></div>
+  <div id="curtain-right"><span id="curtain-text" style="color:rgba(200,164,78,.6)">2026</span></div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div id="progress"><div id="progress-fill"></div></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div id="nav-logo">D.SENE</div>
+  <div id="nav-links">
+    <a href="#bio">About</a>
+    <a href="#services">Services</a>
+    <a href="#projects">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     SECTION 1: HERO — MASSIVE TEXT ZOOM
+     ═══════════════════════════════════════ -->
+<section id="hero">
+  <div id="hero-sticky">
+    <div style="will-change:transform">
+      <h1 class="hero-name">
+        <span>DIAME</span>
+        <span>SENE</span>
+      </h1>
+      <p class="hero-sub">Embedded Systems Engineer &amp; AI Builder</p>
+    </div>
+    <div class="hero-scroll-hint">Scroll to explore ↓</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2: BIO — WORD-BY-WORD REVEAL
+     ═══════════════════════════════════════ -->
+<section id="bio">
+  <div id="bio-sticky">
+    <p class="bio-words" id="bio-text"></p>
+    <div class="tech-pills" id="tech-pills">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">C/C++</span>
+      <span class="tech-pill">JavaScript</span>
+      <span class="tech-pill">React</span>
+      <span class="tech-pill">Next.js</span>
+      <span class="tech-pill">RAG</span>
+      <span class="tech-pill">LangChain</span>
+      <span class="tech-pill">Flutter</span>
+      <span class="tech-pill">Firebase</span>
+      <span class="tech-pill">Supabase</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 3: SERVICES — HORIZONTAL SCROLL
+     ═══════════════════════════════════════ -->
+<section id="services" style="height:300vh">
+  <div id="services-sticky">
+    <div id="services-label">What I Build</div>
+    <div id="services-track">
+      <div class="svc-card">
+        <div class="svc-number">01</div>
+        <div class="svc-icon">&lt;/&gt;</div>
+        <div class="svc-title">Full-Stack Development</div>
+        <div class="svc-desc">End-to-end web applications with React, Next.js, Node.js. From database to deployment.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-number">02</div>
+        <div class="svc-icon">&#x1f9e0;</div>
+        <div class="svc-title">AI &amp; RAG Systems</div>
+        <div class="svc-desc">Intelligent chatbots, document retrieval, custom LLM pipelines with LangChain &amp; vector stores.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-number">03</div>
+        <div class="svc-icon">&#x26a1;</div>
+        <div class="svc-title">No-Code Platforms</div>
+        <div class="svc-desc">Rapid prototyping and production apps with Bubble, FlutterFlow, and automation tools.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-number">04</div>
+        <div class="svc-icon">&#x1f393;</div>
+        <div class="svc-title">Training &amp; Workshops</div>
+        <div class="svc-desc">Technical training for teams on AI integration, web development, and embedded systems.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-number">05</div>
+        <div class="svc-icon">&#x1f527;</div>
+        <div class="svc-title">Embedded Systems</div>
+        <div class="svc-desc">Automotive diagnostics (UDS, CAN, DoIP), firmware development, hardware-software integration.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 4: PROJECTS — CINEMATIC REVEALS
+     ═══════════════════════════════════════ -->
+<section id="projects">
+  <div id="projects-label">Selected Work</div>
+
+  <!-- Project 1: Samacours -->
+  <div class="project-block">
+    <div class="project-info">
+      <div class="project-name"><span class="project-tag-color" style="background:#10b981"></span>Samacours</div>
+      <div class="project-desc">EdTech platform serving Senegalese students with 800+ structured lessons across mathematics, physics, and philosophy. Built to democratize quality education.</div>
+      <div class="project-tech">
+        <span>React</span><span>Node.js</span><span>MongoDB</span><span>EdTech</span><span class="live">LIVE</span>
+      </div>
+    </div>
+    <div class="project-mockup">
+      <div class="project-number">01</div>
+      <div class="mockup-frame">
+        <div class="mockup-gradient" style="background:linear-gradient(135deg,#064e3b,#10b981,#34d399)"></div>
+        <div class="mockup-label">samacours.sn</div>
+        <div class="mockup-badge">LIVE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 2: Gunoor -->
+  <div class="project-block">
+    <div class="project-info">
+      <div class="project-name"><span class="project-tag-color" style="background:#f97316"></span>Gunoor</div>
+      <div class="project-desc">Real-time marketplace connecting local service providers in Senegal. Features instant booking, secure payments, and live availability tracking.</div>
+      <div class="project-tech">
+        <span>Next.js</span><span>Supabase</span><span>Stripe</span><span>Real-time</span><span class="live">LIVE</span>
+      </div>
+    </div>
+    <div class="project-mockup">
+      <div class="project-number">02</div>
+      <div class="mockup-frame">
+        <div class="mockup-gradient" style="background:linear-gradient(135deg,#7c2d12,#f97316,#fb923c)"></div>
+        <div class="mockup-label">gunoor.sn</div>
+        <div class="mockup-badge">LIVE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 3: ClubStats Pro -->
+  <div class="project-block">
+    <div class="project-info">
+      <div class="project-name"><span class="project-tag-color" style="background:#8b5cf6"></span>ClubStats Pro</div>
+      <div class="project-desc">E-sport analytics dashboard delivering real-time statistics, player leaderboards, and comprehensive team management tools for competitive gaming.</div>
+      <div class="project-tech">
+        <span>Flutter</span><span>Firebase</span><span>Analytics</span><span>Real-time</span><span class="live">LIVE</span>
+      </div>
+    </div>
+    <div class="project-mockup">
+      <div class="project-number">03</div>
+      <div class="mockup-frame">
+        <div class="mockup-gradient" style="background:linear-gradient(135deg,#3b0764,#8b5cf6,#a78bfa)"></div>
+        <div class="mockup-label">clubstats.pro</div>
+        <div class="mockup-badge">LIVE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 5: STATS
+     ═══════════════════════════════════════ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number accent" data-target="800">0</div>
+      <div class="stat-label">Lessons Created</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="3">0</div>
+      <div class="stat-label">Projects Live</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="5">0</div>
+      <div class="stat-label">Services Offered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number accent" data-target="2">0</div>
+      <div class="stat-label">Cities Connected</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 6: CONTACT — LETTER ANIMATION
+     ═══════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title" id="contact-title"></h2>
+    <p class="contact-sub">Available for freelance projects worldwide<br><span class="accent">DAKAR &harr; PARIS</span></p>
+    <div class="contact-links">
+      <a href="https://www.malt.fr/profile/diamesene" target="_blank" rel="noopener" class="contact-link">MALT</a>
+      <a href="https://www.upwork.com/freelancers/~01dbb0c435e8a9e498" target="_blank" rel="noopener" class="contact-link">UPWORK</a>
+      <a href="https://www.fiverr.com/diame_sene" target="_blank" rel="noopener" class="contact-link">FIVERR</a>
+      <a href="https://www.comeup.com/en/@diame-sene" target="_blank" rel="noopener" class="contact-link">COMEUP</a>
+    </div>
+    <p class="contact-email"><a href="mailto:diamsene1@gmail.com">diamsene1@gmail.com</a></p>
+    <p class="contact-footer">&copy; 2026 D.SENE // DAKAR &harr; PARIS</p>
+  </div>
+</section>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+(function(){
+'use strict';
+gsap.registerPlugin(ScrollTrigger);
+
+/* ═══════════════════════════════════════════════
+   CURTAIN INTRO
+   ═══════════════════════════════════════════════ */
+var curtain = document.getElementById('curtain');
+var curtainTl = gsap.timeline({delay:0.3});
+curtainTl.to('#curtain-left', {x:'-100%', duration:1.2, ease:'power3.inOut'}, 0.8);
+curtainTl.to('#curtain-right', {x:'100%', duration:1.2, ease:'power3.inOut'}, 0.8);
+curtainTl.to(curtain, {autoAlpha:0, duration:0.01}, 2.0);
+
+/* ═══════════════════════════════════════════════
+   PROGRESS BAR
+   ═══════════════════════════════════════════════ */
+var fill = document.getElementById('progress-fill');
+ScrollTrigger.create({
+  trigger: 'body',
+  start: 'top top',
+  end: 'bottom bottom',
+  onUpdate: function(s){ fill.style.width = (s.progress * 100) + '%'; }
+});
+
+/* ═══════════════════════════════════════════════
+   HERO: MASSIVE ZOOM-IN
+   Camera zooms into the text as you scroll.
+   Text scales from 1 -> huge, opacity goes to 0.
+   ═══════════════════════════════════════════════ */
+var heroTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: 1.2,
+    pin: false
+  }
+});
+heroTl.to('.hero-name', { scale: 8, opacity: 0, ease: 'none', duration: 1 }, 0);
+heroTl.to('.hero-sub', { scale: 3, opacity: 0, ease: 'none', duration: 1 }, 0);
+heroTl.to('.hero-scroll-hint', { opacity: 0, duration: 0.2 }, 0);
+
+/* ═══════════════════════════════════════════════
+   BIO: WORD-BY-WORD HIGHLIGHT
+   Words light up one by one as you scroll.
+   ═══════════════════════════════════════════════ */
+var bioText = 'Embedded systems engineer by training. AI builder by obsession. I create platforms that bridge Dakar and Paris — education, commerce, analytics. From automotive diagnostics to full-stack applications, I ship products that matter.';
+var bioHighlights = ['AI builder','Dakar','Paris','education','commerce','analytics','ship products'];
+var bioEl = document.getElementById('bio-text');
+var words = bioText.split(' ');
+words.forEach(function(w){
+  var span = document.createElement('span');
+  span.className = 'word';
+  var isHL = bioHighlights.some(function(h){ return h.split(' ').indexOf(w.replace(/[.,]/g,'')) >= 0; });
+  if(isHL) span.classList.add('highlight');
+  span.textContent = w;
+  bioEl.appendChild(span);
+});
+var wordEls = bioEl.querySelectorAll('.word');
+
+ScrollTrigger.create({
+  trigger: '#bio',
+  start: 'top top',
+  end: 'bottom bottom',
+  scrub: 0.5,
+  onUpdate: function(self){
+    var progress = self.progress;
+    var activeIdx = Math.floor(progress * wordEls.length * 1.3);
+    wordEls.forEach(function(w, i){
+      w.classList.toggle('active', i <= activeIdx);
+    });
+    // Show tech pills when >85%
+    var pills = document.getElementById('tech-pills');
+    pills.style.opacity = progress > 0.85 ? '1' : '0';
+    pills.style.transition = 'opacity .6s ease';
+  }
+});
+
+/* ═══════════════════════════════════════════════
+   SERVICES: HORIZONTAL SCROLL
+   Cards slide left as user scrolls down.
+   ═══════════════════════════════════════════════ */
+var track = document.getElementById('services-track');
+var cards = track.querySelectorAll('.svc-card');
+var totalScroll = (cards.length * 300) - window.innerWidth + 200;
+
+gsap.to(track, {
+  x: function(){ return -totalScroll; },
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#services',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1,
+    pin: false
+  }
+});
+
+/* ═══════════════════════════════════════════════
+   PROJECTS: CINEMATIC REVEALS
+   Each project slides in with parallax.
+   ═══════════════════════════════════════════════ */
+document.querySelectorAll('.project-block').forEach(function(block){
+  var name = block.querySelector('.project-name');
+  var desc = block.querySelector('.project-desc');
+  var tech = block.querySelector('.project-tech');
+  var mockup = block.querySelector('.mockup-frame');
+
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: block,
+      start: 'top 75%',
+      end: 'top 25%',
+      scrub: 1
+    }
+  });
+  tl.fromTo(name, {opacity:0, x:-40}, {opacity:1, x:0})
+    .fromTo(desc, {opacity:0, x:-40}, {opacity:1, x:0}, '-=0.6')
+    .fromTo(tech, {opacity:0, x:-40}, {opacity:1, x:0}, '-=0.6')
+    .fromTo(mockup, {opacity:0, y:40, scale:0.95}, {opacity:1, y:0, scale:1}, '-=0.8');
+});
+
+/* ═══════════════════════════════════════════════
+   STATS: COUNT UP + REVEAL
+   ═══════════════════════════════════════════════ */
+var statItems = document.querySelectorAll('.stat-item');
+var counted = false;
+
+ScrollTrigger.create({
+  trigger: '#stats',
+  start: 'top 70%',
+  onEnter: function(){
+    if(counted) return;
+    counted = true;
+    statItems.forEach(function(item, i){
+      gsap.to(item, {opacity:1, y:0, duration:0.8, delay:i*0.15, ease:'back.out(1.2)'});
+      var numEl = item.querySelector('.stat-number');
+      var target = parseInt(numEl.getAttribute('data-target'));
+      var obj = {val:0};
+      gsap.to(obj, {
+        val: target,
+        duration: 1.5 + i*0.2,
+        delay: i*0.15,
+        ease: 'power2.out',
+        onUpdate: function(){
+          numEl.textContent = target >= 100 ? Math.floor(obj.val) + '+' : Math.floor(obj.val);
+        }
+      });
+    });
+  }
+});
+
+/* ═══════════════════════════════════════════════
+   CONTACT: LETTER-BY-LETTER
+   ═══════════════════════════════════════════════ */
+var contactText = "LET'S BUILD";
+var contactTitle = document.getElementById('contact-title');
+contactText.split('').forEach(function(ch){
+  var span = document.createElement('span');
+  span.className = 'letter';
+  span.textContent = ch === ' ' ? '\u00A0' : ch;
+  contactTitle.appendChild(span);
+});
+contactTitle.style.opacity = '1';
+
+ScrollTrigger.create({
+  trigger: '#contact',
+  start: 'top 70%',
+  onEnter: function(){
+    var letters = contactTitle.querySelectorAll('.letter');
+    letters.forEach(function(l, i){
+      gsap.to(l, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        delay: i * 0.04,
+        ease: 'back.out(2)'
+      });
+    });
+    gsap.to('.contact-sub', {opacity:1, duration:0.8, delay:0.5});
+    gsap.to('.contact-links', {opacity:1, y:0, duration:0.8, delay:0.7});
+    gsap.to('.contact-email', {opacity:1, duration:0.8, delay:0.9});
+    gsap.to('.contact-footer', {opacity:1, duration:0.8, delay:1.1});
+  }
+});
+
+/* ═══════════════════════════════════════════════
+   SMOOTH NAV COLOR SWITCH
+   Nav inverts when over white sections.
+   ═══════════════════════════════════════════════ */
+ScrollTrigger.create({
+  trigger: '#services',
+  start: 'top 5%',
+  end: 'bottom 5%',
+  onEnter: function(){ document.getElementById('nav').style.mixBlendMode = 'normal'; document.getElementById('nav').style.color = '#000'; },
+  onLeave: function(){ document.getElementById('nav').style.mixBlendMode = 'difference'; document.getElementById('nav').style.color = '#fff'; },
+  onEnterBack: function(){ document.getElementById('nav').style.mixBlendMode = 'normal'; document.getElementById('nav').style.color = '#000'; },
+  onLeaveBack: function(){ document.getElementById('nav').style.mixBlendMode = 'difference'; document.getElementById('nav').style.color = '#fff'; }
+});
+
+})();
+</script>
+</body>
+</html>
