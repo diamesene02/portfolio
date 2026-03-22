@@ -1,0 +1,56 @@
+# Diame Sene — dsene.dev
+
+## Who is Diame Sene?
+Diame Sene is a Software & EE Project Leader at Ampere Software Technology (Renault Group), based in Guyancourt, Île-de-France, France. Originally from Senegal (Dakar), he works across Europe and francophone Africa.
+
+## Professional Role
+- **Current position**: Software & EE Project Leader at Ampere Software Technology (Renault Group) since April 2023
+- **Specialization**: Connectivity/telematics ECUs — development, diagnostics, DV/PV validation, AI-driven engineering
+- **Previous**: Apprentice Engineer at Renault Group (2019-2022)
+
+## Education
+- **CESI** — Engineering degree in Embedded Electrical and Electronic Systems (2019-2022)
+- **IUT Poitiers-Niort-Châtellerault** — DUT in Electrical Engineering and Industrial Computing (2017-2019)
+- **Anthropic** — Claude 101 Certification (March 2026)
+
+## Freelance & Side Projects
+Diame also works as a freelance developer and AI builder, creating:
+
+### Products (sold on Gumroad)
+1. **LinkedIn AI Prospector** — n8n workflow that automates LinkedIn prospection with Claude AI scoring and bilingual message generation
+2. **AI Content Factory** — n8n workflow that transforms 1 LinkedIn post into 5 content formats (Thread X, Newsletter, Instagram, Video Script, Blog SEO)
+3. **AI Cold Email Outreach** — n8n workflow that scrapes prospect websites, analyzes pain points with Claude AI, and generates hyper-personalized cold emails
+
+### Applications
+1. **Samacours** — EdTech platform with 800+ lessons aligned with Senegalese curriculum, AI tutor, gamification (Flutter, Firebase)
+2. **Gunoor** — P2P car rental marketplace for Senegal with Wave (FCFA) & Stripe (EUR) payments (Next.js 15, Prisma)
+3. **ClubStats Pro** — EA Sports FC Pro Clubs stats & management tool (Next.js, Supabase)
+
+## Technical Skills
+- **Embedded**: DoIP, UDS, CAN, ECU diagnostics
+- **Frontend**: Next.js, React, Flutter, React Native, Tailwind CSS
+- **Backend**: Node.js, Python, Prisma ORM, PostgreSQL
+- **AI**: Claude API (Anthropic), OpenAI GPT-4, RAG, LangChain
+- **Automation**: n8n, Make
+- **Payments**: Wave (FCFA), Stripe (EUR)
+- **Deployment**: Vercel, GitHub Actions CI/CD
+
+## Services Offered
+1. Full-Stack Web & Mobile Development (Next.js, Flutter)
+2. AI Integration & RAG (Claude, GPT-4)
+3. No-Code Automation (n8n, Make)
+4. Embedded Systems Engineering (DoIP, UDS, CAN)
+5. Digital AI Products (Gumroad, n8n workflows)
+6. AI & No-Code Training (Bootcamps, Workshops)
+
+## Links
+- Portfolio: https://dsene.dev
+- LinkedIn: https://www.linkedin.com/in/diame-sene-988b2b173/
+- GitHub: https://github.com/diamesene02
+- Gumroad: https://diamesene.gumroad.com
+- Malt: https://www.malt.fr/profile/diamesene
+- Upwork: https://www.upwork.com/freelancers/~01e9980ec1193c0119
+- Email: diamesene02@gmail.com
+
+## Location
+Dakar (Senegal) ↔ Paris (France) — Available for remote freelance missions worldwide.

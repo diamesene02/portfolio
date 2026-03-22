@@ -1,0 +1,18 @@
+/* TEAM */
+Developer: Diame Sene
+Role: Software & EE Project Leader / AI Builder
+Location: Dakar, Senegal ↔ Paris, France
+Contact: diamesene02@gmail.com
+Portfolio: https://dsene.dev
+LinkedIn: https://www.linkedin.com/in/diame-sene-988b2b173/
+
+/* SITE */
+Built with: HTML, CSS, JavaScript, Three.js, GSAP
+Hosted on: Vercel
+Domain: dsene.dev
+Last updated: 2026-03-22
+
+/* THANKS */
+Three.js for 3D globe rendering
+GSAP for animations
+Google Fonts for typography
