@@ -244,10 +244,22 @@ nav.visible{opacity:1}
   #hamburger{display:flex}
   #s-globe-bio .section-inner{position:relative;right:auto;top:auto;transform:none;text-align:center;max-width:90%;margin:0 auto;padding-top:15vh}
   #s-services .section-inner{position:relative;left:auto;top:auto;transform:none;max-width:90%;margin:0 auto;padding-top:10vh;border:none}
-  #s-projects{align-items:center;padding-bottom:0}
-  #s-projects .section-inner{border:none}
-  .proj-grid{grid-template-columns:1fr}
-  .contact-links{flex-direction:column;align-items:center}
+  #s-projects{align-items:flex-start;padding-bottom:0;padding-top:2rem}
+  #s-projects .section-inner{border:none;max-width:95%;padding:1rem;overflow-y:auto;max-height:90vh}
+  .proj-grid{grid-template-columns:1fr 1fr;gap:.6rem}
+  .proj-banner{height:80px;padding:6px 0}
+  .phone-mock{width:45px;border-radius:8px}
+  .phone-mock-notch{width:18px;height:4px;border-radius:0 0 3px 3px}
+  .phone-mock-screen{border-radius:7px}
+  .phone-mock-glare{border-radius:8px}
+  .proj-card-body{padding:.8rem}
+  .proj-title{font-size:.9rem}
+  .proj-desc{font-size:.65rem;line-height:1.4;margin-bottom:.5rem}
+  .proj-badge{font-size:.45rem;margin-bottom:.4rem}
+  .proj-tag{font-size:.45rem;padding:.15rem .35rem}
+  .proj-label{font-size:.5rem;margin-bottom:1rem}
+  .contact-links{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.5rem}
+  .contact-links a{font-size:.6rem;padding:.5rem 1rem}
   .coords{display:none}
   .vignette{display:none}
   .cursor-glow{display:none}
